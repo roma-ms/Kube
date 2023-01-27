@@ -1,0 +1,72 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"ngix-del"},"name":"ngix-del","namespace":"default"},"spec":{"replicas":2,"selector":{"matchLabels":{"app":"ngix-del"}},"template":{"metadata":{"labels":{"app":"ngix-del"}},"spec":{"containers":[{"image":"nginx:1.16","name":"ngix-del","ports":[{"containerPort":8080}]}]}}}}
+    creationTimestamp: "2023-01-25T13:41:42Z"
+    generation: 1
+    labels:
+      app: ngix-del
+    name: ngix-del
+    namespace: default
+    resourceVersion: "202143"
+    uid: 638891b2-c1ba-49c4-9621-9b74c23ee83e
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 2
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: ngix-del
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: ngix-del
+      spec:
+        containers:
+        - image: nginx:1.16
+          imagePullPolicy: IfNotPresent
+          name: ngix-del
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 2
+    conditions:
+    - lastTransitionTime: "2023-01-25T13:41:45Z"
+      lastUpdateTime: "2023-01-25T13:41:45Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2023-01-25T13:41:42Z"
+      lastUpdateTime: "2023-01-25T13:41:45Z"
+      message: ReplicaSet "ngix-del-5999474b94" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 2
+    replicas: 2
+    updatedReplicas: 2
+kind: List
+metadata:
+  resourceVersion: ""

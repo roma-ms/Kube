@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ngix-del
+  name: ngix-del
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ngix-del
+  template:
+    metadata:
+      labels:
+        app: ngix-del
+    spec:
+      containers:
+        - name: ngix-del
+          image: nginx:1.16
+          ports:
+            - containerPort: 8080
